@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FlightRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +50,16 @@ class Flight
      * @ORM\Column(type="float")
      */
     private float $base_price;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="flight")
+     */
+    private ArrayCollection $tickets;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,6 +134,36 @@ class Flight
     public function setBasePrice(float $base_price): self
     {
         $this->base_price = $base_price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ticket[]
+     */
+    public function getTickets(): Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Ticket $ticket): self
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets[] = $ticket;
+            $ticket->setFlight($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket): self
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            // set the owning side to null (unless already changed)
+            if ($ticket->getFlight() === $this) {
+                $ticket->setFlight(null);
+            }
+        }
 
         return $this;
     }
