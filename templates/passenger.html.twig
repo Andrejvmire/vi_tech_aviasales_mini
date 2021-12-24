@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title_prefix %}Пассажир{% endblock %}
+
+{% block main %}
+    <form method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Пассажир</h1>
+        <div class="row justify-content-between">
+            <div class="row col-md-7">
+                <div class="col">
+                    <label for="last-name" class="form-label">Фамилия</label>
+                    <input id="last-name" value="{{ last_name }}" type="text" class="form-control"/>
+                </div>
+                <div class="col">
+                    <label for="first-name" class="form-label">Имя</label>
+                    <input id="first-name" value="{{ first_name }}" type="text" class="form-control"/>
+                </div>
+                <div class="col">
+                    <label for="middle-name" class="form-label">Отчество</label>
+                    <input id="middle-name" value="{{ middle_name }}" type="text" class="form-control"/>
+                </div>
+            </div>
+            <div class="row col-md-4 ">
+                <div class="col-md-4">
+                    <label for="passport" class="form-label"></label>
+                    <input id="passport" readonly value="Паспорт" type="text" class="form-control-plaintext alert"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="passport-s" class="form-label">Серия</label>
+                    <input id="passport-s" value="{{ passport_series }}" type="text" class="form-control" maxlength="4" minlength="4"/>
+                </div>
+                <div class="col-md-5">
+                    <label for="passport-n" class="form-label">Номер</label>
+                    <input id="passport-n" value="{{ passport_number }}" type="text" class="form-control" minlength="6" maxlength="6"/>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary col-3" type="submit">Добавить</button>
+        </div>
+    </form>
+{% endblock %}
