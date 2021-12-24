@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title_prefix %}Бронирование билета{% endblock %}
+
+{% block main %}
+    <form method="post" class="container">
+        <div class="row col-md-6">
+            <div class="row">
+                <h1 class="h3 mb-3 font-weight-normal">Рейс</h1>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <label for="flight" class="form-label">Рейс</label>
+                    <select name="flight" id="flight" class="form-select">
+                        <option selected>Выберите рейс</option>
+                        {% for f in flight %}
+                            <option value="{{ f.id }}">
+                                {{ f.departure.city }} ({{ f.departure.code_iata }}) - {{ f.arrival.city }} ({{ f.arrival.code_iata }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="flight-date" class="form-label">Дата</label>
+                    <input id="flight-date" min="{{ date()|date("Y-m-d") }}" value="" type="date" class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="h3 mb-3 font-weight-normal">Пассажир</h1>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <label for="passenger" class="form-label"></label>
+                    <select name="passenger" id="passenger" class="form-select">
+                        <option selected></option>
+                        {% for p in passenger %}
+                            <option value="{{ p.id }}">
+                                {{ p.full_name }} ({{ p.passport }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <a href="#">Добавить нового пассажира в систему +</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary col-3" type="submit">Купить</button>
+        </div>
+    </form>
+{% endblock %}
