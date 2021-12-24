@@ -9,9 +9,9 @@
                 <h1 class="h3 mb-3 font-weight-normal">Рейс</h1>
             </div>
             <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                     <label for="flight" class="form-label">Рейс</label>
-                    <select name="flight" id="flight" class="form-select">
+                    <select name="flight" id="flight" class="form-select" required>
                         <option selected>Выберите рейс</option>
                         {% for f in flight %}
                             <option value="{{ f.id }}">
@@ -20,18 +20,18 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <label for="flight-date" class="form-label">Дата</label>
-                    <input id="flight-date" min="{{ date()|date("Y-m-d") }}" value="" type="date" class="form-control"/>
+                    <input id="flight-date" min="{{ date()|date("Y-m-d") }}" value="" type="date" class="form-control" required/>
                 </div>
             </div>
             <div class="row">
                 <h1 class="h3 mb-3 font-weight-normal">Пассажир</h1>
             </div>
             <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                     <label for="passenger" class="form-label"></label>
-                    <select name="passenger" id="passenger" class="form-select">
+                    <select name="passenger" id="passenger" class="form-select" required>
                         <option selected></option>
                         {% for p in passenger %}
                             <option value="{{ p.id }}">
