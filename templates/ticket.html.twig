@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title_prefix %}Билет{% endblock %}
+{% block title_postfix %}успешно забронирован{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <p class="h3 mb-3">{{ passenger.full_name }} ({{ passenger.passport }})</p>
+    </div>
+    <div class="row">
+        <p class="h4 mb-3 text-decoration-underline">Билет:</p>
+        <p class="h4 mb-3">{{ ticket_date|date('d.m.Y') }}</p>
+        <p class="h4 mb-3">
+            {{ flight.departure.city }} ({{ flight.departure.code_iata }}) - {{ flight.arrival.city }} ({{ flight.arrival.code_iata }})
+        </p>
+        <p class="h4 font-weight-normal">Цена: {{ price }} рублей</p>
+    </div>
+{% endblock %}
