@@ -6,7 +6,6 @@ use App\DTO\TicketBookingDTO;
 use App\Entity\Ticket;
 use App\Form\TicketBookingForm;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,4 +41,15 @@ class TicketBookingController extends \Symfony\Bundle\FrameworkBundle\Controller
         ]);
     }
 
+    /**
+     * @Route("/view/{id}", name="app.ticket.view")
+     */
+    public function viewAction($id): Response
+    {
+        $ticket = $this->getDoctrine()->getRepository(Ticket::class)->findOneBy(["id" => $id]);
+        dump($ticket);
+        return $this->render('ticket.html.twig', [
+            "ticket" => $ticket
+        ]);
+    }
 }

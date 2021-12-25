@@ -5,14 +5,14 @@
 
 {% block main %}
     <div class="row">
-        <p class="h3 mb-3">{{ passenger.full_name }} ({{ passenger.passport }})</p>
+        <p class="h3 mb-3">{{ ticket.passenger }})</p>
     </div>
     <div class="row">
         <p class="h4 mb-3 text-decoration-underline">Билет:</p>
-        <p class="h4 mb-3">{{ ticket_date|date('d.m.Y') }}</p>
+        <p class="h4 mb-3">{{ ticket.date|date('d.m.Y') }}</p>
         <p class="h4 mb-3">
-            {{ flight.departure.city }} ({{ flight.departure.code_iata }}) - {{ flight.arrival.city }} ({{ flight.arrival.code_iata }})
+            {{ ticket.flight }})
         </p>
-        <p class="h4 font-weight-normal">Цена: {{ price }} рублей</p>
+        <p class="h4 font-weight-normal">Цена: {{ ticket.price }} рублей</p>
     </div>
 {% endblock %}
