@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DTO\PassengerDTO;
 use App\Repository\PassengerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -47,11 +48,21 @@ class Passenger
     /**
      * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="passenger")
      */
-    private ArrayCollection $tickets;
+    private Collection $tickets;
 
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+    }
+
+    public static function createFromDTO(PassengerDTO $DTO): self
+    {
+        $user = new self();
+        $user->setFirstName($DTO->getFirstName());
+        $user->setLastName($DTO->getLastName());
+        $user->setMiddleName($DTO->getMiddleName());
+        $user->setPassport(sprintf("%s %s", $DTO->getPassportSeries(), $DTO->getPassportNumber()));
+        return $user;
     }
 
     public function getId(): ?int
@@ -120,9 +131,9 @@ class Passenger
     }
 
     /**
-     * @return Collection|Ticket[]
+     * @return ArrayCollection|Ticket[]
      */
-    public function getTickets(): Collection
+    public function getTickets(): ArrayCollection
     {
         return $this->tickets;
     }
