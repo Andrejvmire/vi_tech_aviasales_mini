@@ -54,11 +54,21 @@ class Flight
     /**
      * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="flight")
      */
-    private ArrayCollection $tickets;
+    private Collection $tickets;
 
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s (%s) - %s (%s)',
+            $this->departure->getCity(),
+            $this->departure->getCodeIata(),
+            $this->arrival->getCity(),
+            $this->arrival->getCodeIata()
+        );
     }
 
     public function getId(): ?int

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DTO\TicketBookingDTO;
 use App\Repository\TicketRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,7 +44,16 @@ class Ticket
     /**
      * @ORM\Column(type="smallint")
      */
-    private int $status;
+    private int $status = 1;
+
+    public static function createFromDTO(TicketBookingDTO $dto): self
+    {
+        $ticket = new self();
+        $ticket->setFlight($dto->getFlightId());
+        $ticket->setPassenger($dto->getPassengerId());
+        $ticket->setDate($dto->getDate());
+        return $ticket;
+    }
 
     public function getId(): ?int
     {

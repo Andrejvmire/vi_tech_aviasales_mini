@@ -65,6 +65,16 @@ class Passenger
         return $user;
     }
 
+    public function __toString()
+    {
+        return sprintf('%s %s %s (%s)',
+            $this->last_name,
+            $this->first_name,
+            $this->middle_name,
+            $this->passport
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

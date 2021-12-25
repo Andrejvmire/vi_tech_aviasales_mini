@@ -10,29 +10,32 @@
             <div class="col">
                 {{ form_label(passenger_form.last_name) }}
                 {{ form_widget(passenger_form.last_name) }}
+                {{ form_errors(passenger_form.last_name) }}
             </div>
             <div class="col">
                 {{ form_label(passenger_form.first_name) }}
                 {{ form_widget(passenger_form.first_name) }}
+                {{ form_errors(passenger_form.first_name) }}
             </div>
             <div class="col">
                 {{ form_label(passenger_form.middle_name) }}
                 {{ form_widget(passenger_form.middle_name) }}
+                {{ form_errors(passenger_form.middle_name) }}
             </div>
         </div>
         <div class="row col-4 ">
-            <div class="col-4">
-                <label for="passport" class="form-label"></label>
-                <input id="passport" readonly value="Паспорт" type="text"
-                       class="form-control-plaintext"/>
+            <div class="col-4 gy-4">
+                <p class="form-label">Паспорт</p>
             </div>
             <div class="col-3">
                 {{ form_label(passenger_form.passport_series) }}
                 {{ form_widget(passenger_form.passport_series) }}
+                {{ form_errors(passenger_form.passport_series) }}
             </div>
             <div class="col-5">
                 {{ form_label(passenger_form.passport_number) }}
                 {{ form_widget(passenger_form.passport_number) }}
+                {{ form_errors(passenger_form.passport_number) }}
             </div>
         </div>
     </div>

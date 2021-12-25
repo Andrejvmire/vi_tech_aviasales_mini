@@ -3,26 +3,25 @@
 {% block title_prefix %}Бронирование билета{% endblock %}
 
 {% block main %}
-    <form method="post" class="container">
+    {{ form_start(ticket_booking_form) }}
         <div class="row col-md-6">
             <div class="row">
                 <h1 class="h3 mb-3 font-weight-normal">Рейс</h1>
             </div>
             <div class="row">
                 <div class="col-8">
-                    <label for="flight" class="form-label">Рейс</label>
-                    <select name="flight" id="flight" class="form-select" required>
-                        <option selected>Выберите рейс</option>
-                        {% for f in flight %}
-                            <option value="{{ f.id }}">
-                                {{ f.departure.city }} ({{ f.departure.code_iata }}) - {{ f.arrival.city }} ({{ f.arrival.code_iata }})
-                            </option>
-                        {% endfor %}
-                    </select>
+                    {{ form_label(ticket_booking_form.flight_id) }}
+                    {{ form_widget(ticket_booking_form.flight_id) }}
+                    {{ form_errors(ticket_booking_form.flight_id) }}
                 </div>
                 <div class="col-4">
-                    <label for="flight-date" class="form-label">Дата</label>
-                    <input id="flight-date" min="{{ date()|date("Y-m-d") }}" value="" type="date" class="form-control" required/>
+                    {{ form_label(ticket_booking_form.date) }}
+                    {{ form_widget(ticket_booking_form.date, {
+                        "attr": {
+                            "min": date()|date("Y-m-d")
+                        }
+                    }) }}
+                    {{ form_errors(ticket_booking_form.date) }}
                 </div>
             </div>
             <div class="row mt-3">
@@ -30,23 +29,16 @@
             </div>
             <div class="row">
                 <div class="col-8">
-                    <label for="passenger" class="form-label"></label>
-                    <select name="passenger" id="passenger" class="form-select" required>
-                        <option selected></option>
-                        {% for p in passenger %}
-                            <option value="{{ p.id }}">
-                                {{ p.full_name }} ({{ p.passport }})
-                            </option>
-                        {% endfor %}
-                    </select>
+                    {{ form_widget(ticket_booking_form.passenger_id) }}
+                    {{ form_errors(ticket_booking_form.passenger_id) }}
                 </div>
             </div>
             <div class="row mt-2">
-                <a href="#">Добавить нового пассажира в систему +</a>
+                <a href="{{ path('app.passenger') }}">Добавить нового пассажира в систему +</a>
             </div>
         </div>
         <div class="row justify-content-center mt-3">
-            <button class="btn btn-primary col-3" type="submit">Купить</button>
+            {{ form_widget(ticket_booking_form.submit) }}
         </div>
-    </form>
+    {{ form_end(ticket_booking_form) }}
 {% endblock %}
