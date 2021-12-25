@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PassengerForm extends AbstractType
 {
     private const LABEL_ATTR = [
-        "class" => "form_control"
+        "class" => "form_label"
     ];
 
     private const TEXT_TYPE_ATTR = [
