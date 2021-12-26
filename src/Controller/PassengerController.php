@@ -28,7 +28,7 @@ class PassengerController extends AbstractController
             $passenger = Passenger::createFromDTO($dto);
             $entityManager->persist($passenger);
             $entityManager->flush();
-            return $this->redirectToRoute("other_test");
+            return $this->redirectToRoute("app.ticket.buy");
         }
         return $this->renderForm('passenger.html.twig', [
             "passenger_form" => $form,
