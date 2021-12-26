@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TicketBookingController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
-     * @Route("/buy", "app.ticket.buy")
+     * @Route("/buy", name="app.ticket.buy")
      */
     public function buyAction(Request $request, EntityManagerInterface $entityManager): Response
     {
