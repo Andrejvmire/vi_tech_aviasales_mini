@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title_prefix %}Билеты{% endblock %}
+
+{% block main %}
+    {{ dump(tickets) }}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Номер рейса</th>
+            <th scope="col">Рейс</th>
+            <th scope="col">Пассажир</th>
+            <th scope="col">Дата вылета</th>
+            <th scope="col">Стоимость</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr class="{{ ticket.status == 1 ? "table-primary" : "table-secondary"}}">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ ticket.flight.number }}</td>
+                <td>{{ ticket.flight }}</td>
+                <td>{{ ticket.passenger }}</td>
+                <td>{{ ticket.date|date('d.m.Y') }}</td>
+                <td>{{ ticket.price }}</td>
+                <td>
+                    <a href="{{ path('app.ticket.delete', {'id': ticket.id}) }}" class="btn btn-secondary {{ ticket.status == 0 ? "disabled" }}">Отменить</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-center mt-3">
+        <a href="{{ path('app.ticket.buy') }}" class="btn btn-primary col-3">Купить билет</a>
+    </div>
+{% endblock %}

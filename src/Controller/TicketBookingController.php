@@ -42,7 +42,28 @@ class TicketBookingController extends \Symfony\Bundle\FrameworkBundle\Controller
     }
 
     /**
-     * @Route("/view/{id}", name="app.ticket.view")
+     * @Route("/view", name="app.tickets.view.all")
+     */
+    public function viewAllAction(): Response
+    {
+        $tickets = $this->getDoctrine()->getRepository(Ticket::class)
+            ->findAll();
+        return $this->render('all_tickets.html.twig', [
+            'tickets' => $tickets
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id<\d+>}", name="app.ticket.delete")
+     */
+    public function deleteAction(int $id): Response
+    {
+        $this->getDoctrine()->getRepository(Ticket::class)->remove($id);
+        return $this->redirectToRoute('app.tickets.view.all');
+    }
+
+    /**
+     * @Route("/view/{id<\d+>}", name="app.ticket.view")
      */
     public function viewAction($id): Response
     {

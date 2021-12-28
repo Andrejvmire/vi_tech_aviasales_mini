@@ -14,6 +14,6 @@ class TestController extends AbstractController
      */
     public function testAction(): Response
     {
-        return $this->redirectToRoute('app.ticket.buy');
+        return $this->redirectToRoute('app.tickets.view.all');
     }
 }
